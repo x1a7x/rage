@@ -1,0 +1,19 @@
+
+
+rage -p -o b.txt a.txt        encrypts with password
+
+rage -d -o c.txt b.txt        decrypts with password
+
+
+
+//////////////////////////////////////////////////
+
+
+rage-keygen -o key.key
+
+
+rage -r age1p7ft08mlxdt8xp5jnte4r0z5rryaeals5yr9095fafc038q23p2sfcu5tc -o b.txt a.txt       encrypts with key
+
+
+rage -d -i key.key -o c.txt b.txt                                      decrypts with key
+

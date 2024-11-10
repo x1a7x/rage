@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAGE Key-Based Encryption and Decryption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            font-size: 1.1em;
+            border-radius: 3px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-left: 3px solid #2c3e50;
+            font-size: 1em;
+            white-space: pre-wrap;
+        }
+        .command {
+            background-color: #e7f3fe;
+            border-left: 4px solid #007bff;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>RAGE Key-Based Encryption and Decryption</h1>
+
+<p>This guide explains how to use <code>rage</code> for encrypting and decrypting files using a key file, rather than a passphrase. The key file is generated with <code>rage-keygen.exe</code>, and the encryption and decryption operations are performed using <code>rage.exe</code>.</p>
+
+<h2>Prerequisites</h2>
+<p>Ensure you have <code>rage.exe</code> and <code>rage-keygen.exe</code> available in the same directory where you're working.</p>
+
+<h2>Step 1: Generate a Key</h2>
+<p>To generate a key file (<code>key.key</code>), run the following command in your terminal or command prompt:</p>
+
+<div class="command">
+<pre>rage-keygen.exe -o key.key</pre>
+</div>
+
+<p>This will create a key file called <code>key.key</code> in the current directory. This key will be used for both encryption and decryption.</p>
+
+<h2>Step 2: Encrypt a File</h2>
+<p>To encrypt a file (<code>a.txt</code>), use the key file (<code>key.key</code>) and output the encrypted content to another file (<code>b.txt</code>):</p>
+
+<div class="command">
+<pre>rage.exe --encrypt -i key.key a.txt -o b.txt</pre>
+</div>
+
+<ul>
+    <li><code>a.txt</code>: The original plaintext file you want to encrypt.</li>
+    <li><code>key.key</code>: The key file used for encryption.</li>
+    <li><code>b.txt</code>: The encrypted file output.</li>
+</ul>
+
+<h2>Step 3: Decrypt a File</h2>
+<p>To decrypt the previously encrypted file (<code>b.txt</code>) back into plaintext (<code>c.txt</code>), run the following command:</p>
+
+<div class="command">
+<pre>rage.exe --decrypt -i key.key b.txt -o c.txt</pre>
+</div>
+
+<ul>
+    <li><code>b.txt</code>: The encrypted file.</li>
+    <li><code>key.key</code>: The key file used for decryption.</li>
+    <li><code>c.txt</code>: The output file that contains the decrypted plaintext.</li>
+</ul>
+
+<h2>Example Workflow</h2>
+
+<ol>
+    <li><strong>Generate a key:</strong></li>
+    <div class="command">
+    <pre>rage-keygen.exe -o key.key</pre>
+    </div>
+
+    <li><strong>Encrypt <code>a.txt</code> to <code>b.txt</code>:</strong></li>
+    <div class="command">
+    <pre>rage.exe --encrypt -i key.key a.txt -o b.txt</pre>
+    </div>
+
+    <li><strong>Decrypt <code>b.txt</code> back to <code>c.txt</code>:</strong></li>
+    <div class="command">
+    <pre>rage.exe --decrypt -i key.key b.txt -o c.txt</pre>
+    </div>
+</ol>
+
+<p>In this example:</p>
+<ul>
+    <li><code>a.txt</code> is your original file.</li>
+    <li><code>b.txt</code> is the encrypted version of <code>a.txt</code>.</li>
+    <li><code>c.txt</code> is the decrypted version of <code>b.txt</code>, which should match <code>a.txt</code>.</li>
+</ul>
+
+<h2>Encrypting and Decrypting with a Passphrase (Password Mode)</h2>
+<p>If you prefer to encrypt and decrypt your files using a passphrase (password) instead of a key file, follow the steps below:</p>
+
+<h3>Step 1: Encrypt a File with a Passphrase</h3>
+<p>To encrypt a file using a passphrase, run the following command:</p>
+
+<div class="command">
+<pre>rage -p -o b.txt a.txt </pre>
+</div>
+
+<ul>
+    <li><code>a.txt</code>: The original file you want to encrypt.</li>
+    <li><code>b.txt</code>: The output encrypted file.</li>
+</ul>
+
+<p>After running this command, you will be prompted to enter a passphrase. This passphrase will be required to decrypt the file later.</p>
+
+<h3>Step 2: Decrypt a File with a Passphrase</h3>
+<p>To decrypt a file that was encrypted with a passphrase, use the following command:</p>
+
+<div class="command">
+<pre>rage -d -o c.txt b.txt  </pre>
+</div>
+
+<ul>
+    <li><code>b.txt</code>: The encrypted file you want to decrypt.</li>
+    <li><code>c.txt</code>: The output decrypted file.</li>
+</ul>
+
+<p>You will be prompted to enter the same passphrase you used during encryption. Once you enter the correct passphrase, the file will be decrypted.</p>
+
+<h2>Important Note</h2>
+<p>Make sure to keep your passphrase safe and remember it, as you won't be able to decrypt the file without it!</p>
+
+</body>
+</html>
+
